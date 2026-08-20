@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+
+uploads/
+
+scan_history.json
+
+.env
+
+.vscode/
+.idea/

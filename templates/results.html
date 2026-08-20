@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>PrivacyGuard | Scan Results</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #0f172a,
+                    #111827,
+                    #172554
+                );
+
+            color: #f8fafc;
+
+            padding: 30px 20px;
+        }
+
+
+        .container {
+
+            width: 100%;
+
+            max-width: 1100px;
+
+            margin: auto;
+        }
+
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            margin-bottom: 30px;
+        }
+
+
+        .brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+        }
+
+
+        .brand-icon {
+
+            font-size: 35px;
+        }
+
+
+        .brand h1 {
+
+            font-size: 25px;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        .brand p {
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            margin-top: 3px;
+        }
+
+
+        .new-scan {
+
+            text-decoration: none;
+
+            color: #cbd5e1;
+
+            border: 1px solid #334155;
+
+            padding: 9px 15px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            transition: 0.3s;
+        }
+
+
+        .new-scan:hover {
+
+            background: #1e293b;
+
+            color: white;
+        }
+
+
+        /* =========================
+           FILE INFORMATION
+        ========================= */
+
+        .file-info {
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.05
+            );
+
+            border: 1px solid rgba(
+                255,
+                255,
+                255,
+                0.08
+            );
+
+            border-radius: 14px;
+
+            padding: 18px 22px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .file-info span {
+
+            color: #64748b;
+
+            font-size: 12px;
+        }
+
+
+        .file-info strong {
+
+            display: block;
+
+            margin-top: 5px;
+
+            font-size: 15px;
+
+            word-break: break-all;
+        }
+
+
+        /* =========================
+           TOP DASHBOARD
+        ========================= */
+
+        .top-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 20px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .card {
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.05
+            );
+
+            border: 1px solid rgba(
+                255,
+                255,
+                255,
+                0.09
+            );
+
+            border-radius: 16px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 12px 30px
+                rgba(0, 0, 0, 0.18);
+        }
+
+
+        .card-title {
+
+            color: #94a3b8;
+
+            font-size: 13px;
+
+            margin-bottom: 15px;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.7px;
+        }
+
+
+        /* =========================
+           SCORE
+        ========================= */
+
+        .score-card {
+
+            text-align: center;
+        }
+
+
+        .score {
+
+            font-size: 65px;
+
+            font-weight: bold;
+
+            margin: 5px 0;
+        }
+
+
+        .score-label {
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        .risk-level {
+
+            display: inline-block;
+
+            margin-top: 15px;
+
+            padding: 7px 15px;
+
+            border-radius: 20px;
+
+            background: rgba(
+                239,
+                68,
+                68,
+                0.12
+            );
+
+            color: #fca5a5;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+
+        /* =========================
+           SHAREABILITY
+        ========================= */
+
+        .share-card {
+
+            text-align: center;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: center;
+        }
+
+
+        .share-icon {
+
+            font-size: 35px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .share-status {
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            margin-bottom: 10px;
+        }
+
+
+        .share-message {
+
+            color: #94a3b8;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           SECTION
+        ========================= */
+
+        .section {
+
+            margin-bottom: 20px;
+        }
+
+
+        .section-title {
+
+            font-size: 20px;
+
+            margin-bottom: 15px;
+        }
+
+
+        /* =========================
+           RISK CARDS
+        ========================= */
+
+        .risk-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+        }
+
+
+        .risk-card {
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.05
+            );
+
+            border: 1px solid rgba(
+                255,
+                255,
+                255,
+                0.08
+            );
+
+            border-radius: 14px;
+
+            padding: 20px;
+
+            text-align: center;
+        }
+
+
+        .risk-icon {
+
+            font-size: 30px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .risk-number {
+
+            font-size: 30px;
+
+            font-weight: bold;
+
+            margin-bottom: 5px;
+        }
+
+
+        .risk-name {
+
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            margin-bottom: 10px;
+        }
+
+
+        .severity {
+
+            display: inline-block;
+
+            padding: 4px 9px;
+
+            border-radius: 12px;
+
+            font-size: 10px;
+
+            font-weight: bold;
+        }
+
+
+        .severity-medium {
+
+            background: rgba(
+                234,
+                179,
+                8,
+                0.15
+            );
+
+            color: #fde047;
+        }
+
+
+        .severity-high {
+
+            background: rgba(
+                249,
+                115,
+                22,
+                0.15
+            );
+
+            color: #fdba74;
+        }
+
+
+        .severity-critical {
+
+            background: rgba(
+                239,
+                68,
+                68,
+                0.15
+            );
+
+            color: #fca5a5;
+        }
+
+
+        /* =========================
+           TWO COLUMN SECTIONS
+        ========================= */
+
+        .two-column {
+
+            display: grid;
+
+            grid-template-columns:
+                1fr 1fr;
+
+            gap: 20px;
+        }
+
+
+        .list {
+
+            padding-left: 20px;
+        }
+
+
+        .list li {
+
+            margin-bottom: 12px;
+
+            color: #cbd5e1;
+
+            line-height: 1.5;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .action-card {
+
+            text-align: center;
+
+            margin-top: 20px;
+        }
+
+
+        .action-buttons {
+
+            display: flex;
+
+            justify-content: center;
+
+            gap: 12px;
+
+            flex-wrap: wrap;
+
+            margin-top: 15px;
+        }
+
+
+        .button {
+
+            display: inline-block;
+
+            padding: 12px 20px;
+
+            border-radius: 9px;
+
+            text-decoration: none;
+
+            border: none;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+
+        .protect {
+
+            background: #2563eb;
+
+            color: white;
+        }
+
+
+        .protect:hover {
+
+            background: #1d4ed8;
+
+            transform: translateY(-2px);
+        }
+
+
+        .report {
+
+            background: #334155;
+
+            color: white;
+        }
+
+
+        .report:hover {
+
+            background: #475569;
+        }
+
+
+        /* =========================
+           HISTORY
+        ========================= */
+
+        .history-list {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 12px;
+        }
+
+
+        .history-card {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 16px;
+
+            border-radius: 12px;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.04
+            );
+
+            border: 1px solid rgba(
+                255,
+                255,
+                255,
+                0.08
+            );
+        }
+
+
+        .history-card p {
+
+            margin: 6px 0 0;
+
+            color: #94a3b8;
+
+            font-size: 13px;
+        }
+
+
+        .history-status {
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            text-align: right;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            text-align: center;
+
+            color: #475569;
+
+            font-size: 12px;
+
+            padding: 25px 0 10px;
+        }
+
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .top-grid,
+            .two-column {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .risk-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            body {
+
+                padding: 20px 12px;
+            }
+
+
+            .header {
+
+                align-items: flex-start;
+
+                gap: 15px;
+            }
+
+
+            .brand h1 {
+
+                font-size: 20px;
+            }
+
+
+            .risk-grid {
+
+                grid-template-columns: 1fr;
+            }
+
+
+            .score {
+
+                font-size: 50px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- =========================
+         HEADER
+    ========================== -->
+
+    <header class="header">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                🔐
+            </div>
+
+            <div>
+
+                <h1>
+                    PrivacyGuard
+                </h1>
+
+                <p>
+                    Digital Privacy Risk Analyzer
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <a
+            href="/"
+            class="new-scan"
+        >
+            ← New Scan
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         FILE INFORMATION
+    ========================== -->
+
+    <div class="file-info">
+
+        <span>
+            FILE SCANNED
+        </span>
+
+        <strong>
+            📄 {{ filename }}
+        </strong>
+
+    </div>
+
+
+    <!-- =========================
+         SCORE + SHAREABILITY
+    ========================== -->
+
+    <div class="top-grid">
+
+
+        <!-- SCORE -->
+
+        <div class="card score-card">
+
+            <div class="card-title">
+                Privacy Risk Score
+            </div>
+
+            <div class="score">
+                {{ score }}
+            </div>
+
+            <div class="score-label">
+                out of 100
+            </div>
+
+            <div class="risk-level">
+                {{ level }}
+            </div>
+
+        </div>
+
+
+        <!-- SHAREABILITY -->
+
+        <div class="card share-card">
+
+            <div class="share-icon">
+                🚦
+            </div>
+
+            <div class="card-title">
+                Shareability Verdict
+            </div>
+
+            <div class="share-status">
+                {{ share_status }}
+            </div>
+
+            <p class="share-message">
+                {{ share_message }}
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         RISK BREAKDOWN
+    ========================== -->
+
+    <section class="section">
+
+        <h2 class="section-title">
+            📊 Risk Breakdown
+        </h2>
+
+
+        <div class="risk-grid">
+
+
+            <!-- EMAIL -->
+
+            <div class="risk-card">
+
+                <div class="risk-icon">
+                    📧
+                </div>
+
+                <div class="risk-number">
+                    {{ risk_breakdown["emails"] }}
+                </div>
+
+                <div class="risk-name">
+                    Email Addresses
+                </div>
+
+                {% if severity["emails"] != "NONE" %}
+
+                    <div class="severity severity-medium">
+                        {{ severity["emails"] }}
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- PHONE -->
+
+            <div class="risk-card">
+
+                <div class="risk-icon">
+                    📱
+                </div>
+
+                <div class="risk-number">
+                    {{ risk_breakdown["phone_numbers"] }}
+                </div>
+
+                <div class="risk-name">
+                    Phone Numbers
+                </div>
+
+                {% if severity["phone_numbers"] != "NONE" %}
+
+                    <div class="severity severity-high">
+                        {{ severity["phone_numbers"] }}
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- IP -->
+
+            <div class="risk-card">
+
+                <div class="risk-icon">
+                    🌐
+                </div>
+
+                <div class="risk-number">
+                    {{ risk_breakdown["ip_addresses"] }}
+                </div>
+
+                <div class="risk-name">
+                    IP Addresses
+                </div>
+
+                {% if severity["ip_addresses"] != "NONE" %}
+
+                    <div class="severity severity-medium">
+                        {{ severity["ip_addresses"] }}
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- CREDENTIALS -->
+
+            <div class="risk-card">
+
+                <div class="risk-icon">
+                    🔐
+                </div>
+
+                <div class="risk-number">
+                    {{ risk_breakdown["credentials"] }}
+                </div>
+
+                <div class="risk-name">
+                    Credentials / Secrets
+                </div>
+
+                {% if severity["credentials"] != "NONE" %}
+
+                    <div class="severity severity-critical">
+                        {{ severity["credentials"] }}
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         SCAN SUMMARY
+    ========================== -->
+
+    <section class="section">
+
+        <div class="card">
+
+            <h2 class="section-title">
+                📋 Scan Summary
+            </h2>
+
+            <p style="color:#94a3b8; line-height:1.7;">
+
+                PrivacyGuard checked
+                <strong>
+                    {{ categories_checked }}
+                </strong>
+                privacy categories and detected
+
+                <strong>
+                    {{ total_risks }}
+                </strong>
+                potential privacy risks.
+
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         EXPLANATIONS + RECOMMENDATIONS
+    ========================== -->
+
+    <div class="two-column">
+
+
+        <!-- EXPLANATIONS -->
+
+        <section class="card">
+
+            <h2 class="section-title">
+                🧠 Why These Risks Matter
+            </h2>
+
+            <ul class="list">
+
+                {% for explanation in explanations %}
+
+                    <li>
+                        {{ explanation }}
+                    </li>
+
+                {% endfor %}
+
+            </ul>
+
+        </section>
+
+
+        <!-- RECOMMENDATIONS -->
+
+        <section class="card">
+
+            <h2 class="section-title">
+                🛡️ Privacy Recommendations
+            </h2>
+
+            <ul class="list">
+
+                {% for recommendation in recommendations %}
+
+                    <li>
+                        {{ recommendation }}
+                    </li>
+
+                {% endfor %}
+
+            </ul>
+
+        </section>
+
+
+    </div>
+
+
+    <!-- =========================
+         PROTECT + REPORT
+    ========================== -->
+
+    <div class="card action-card">
+
+        <h2 class="section-title">
+            🔒 Protect Your File
+        </h2>
+
+        <p style="color:#94a3b8;">
+
+            Remove detected sensitive information
+            before sharing your document.
+
+        </p>
+
+
+        <div class="action-buttons">
+
+
+            <form
+                action="/redact/{{ filename }}"
+                method="POST"
+            >
+
+                <button
+                    type="submit"
+                    class="button protect"
+                >
+                    🔒 Protect & Download Clean File
+                </button>
+
+            </form>
+
+
+            <a
+                href="/report/{{ filename }}"
+                class="button report"
+            >
+                📄 Download Privacy Report
+            </a>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         SCAN HISTORY
+    ========================== -->
+
+    <section
+        class="section"
+        style="margin-top:20px;"
+    >
+
+        <h2 class="section-title">
+            🕘 Recent Scans
+        </h2>
+
+
+        {% if history %}
+
+            <div class="history-list">
+
+                {% for scan in history %}
+
+                    <div class="history-card">
+
+                        <div>
+
+                            <strong>
+                                📄 {{ scan["filename"] }}
+                            </strong>
+
+                            <p>
+
+                                Risk Score:
+                                <strong>
+                                    {{ scan["score"] }}/100
+                                </strong>
+
+                            </p>
+
+                            <p>
+
+                                Risk Level:
+                                {{ scan["level"] }}
+
+                            </p>
+
+                        </div>
+
+
+                        <div class="history-status">
+
+                            {{ scan["share_status"] }}
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+
+        {% else %}
+
+            <div class="card">
+
+                <p style="color:#64748b;">
+                    No previous scans yet.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        🛡️ PrivacyGuard
+        • College Cybersecurity Project
+
+    </footer>
+
+
+</div>
+
+
+</body>
+
+</html>

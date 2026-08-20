@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>PrivacyGuard | Digital Privacy Risk Analyzer</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+
+            font-family: Arial, sans-serif;
+
+            min-height: 100vh;
+
+            background:
+                radial-gradient(
+                    circle at top right,
+                    #172554,
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #020617,
+                    #0f172a,
+                    #111827
+                );
+
+            color: #f8fafc;
+
+            padding: 25px 20px;
+        }
+
+
+        .container {
+
+            max-width: 1050px;
+
+            margin: auto;
+        }
+
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        .navbar {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 10px 0 35px;
+        }
+
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .logo-icon {
+
+            font-size: 32px;
+        }
+
+
+        .logo-text {
+
+            font-size: 23px;
+
+            font-weight: bold;
+
+            letter-spacing: 0.5px;
+        }
+
+
+        .student-badge {
+
+            border: 1px solid #334155;
+
+            color: #94a3b8;
+
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+            font-size: 11px;
+        }
+
+
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+
+            text-align: center;
+
+            padding: 55px 20px 35px;
+        }
+
+
+        .hero-icon {
+
+            font-size: 55px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .hero h1 {
+
+            font-size: 46px;
+
+            line-height: 1.1;
+
+            margin-bottom: 15px;
+        }
+
+
+        .hero h1 span {
+
+            color: #60a5fa;
+        }
+
+
+        .hero p {
+
+            max-width: 650px;
+
+            margin: auto;
+
+            color: #94a3b8;
+
+            font-size: 16px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================
+           UPLOAD CARD
+        ========================= */
+
+        .upload-card {
+
+            max-width: 700px;
+
+            margin: 25px auto 45px;
+
+            padding: 35px;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.05
+            );
+
+            border: 1px solid rgba(
+                255,
+                255,
+                255,
+                0.10
+            );
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 20px 50px
+                rgba(0, 0, 0, 0.30);
+
+            text-align: center;
+        }
+
+
+        .upload-area {
+
+            border: 2px dashed #334155;
+
+            border-radius: 14px;
+
+            padding: 35px 20px;
+
+            transition: 0.3s;
+        }
+
+
+        .upload-area:hover {
+
+            border-color: #60a5fa;
+
+            background: rgba(
+                96,
+                165,
+                250,
+                0.04
+            );
+        }
+
+
+        .upload-icon {
+
+            font-size: 42px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .upload-title {
+
+            font-size: 18px;
+
+            font-weight: bold;
+
+            margin-bottom: 7px;
+        }
+
+
+        .upload-subtitle {
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-bottom: 20px;
+        }
+
+
+        input[type="file"] {
+
+            display: block;
+
+            width: 100%;
+
+            max-width: 400px;
+
+            margin: auto;
+
+            padding: 10px;
+
+            border-radius: 8px;
+
+            border: 1px solid #334155;
+
+            background: #0f172a;
+
+            color: #cbd5e1;
+        }
+
+
+        input[type="file"]::file-selector-button {
+
+            background: #1e293b;
+
+            color: white;
+
+            border: none;
+
+            padding: 8px 12px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            margin-right: 10px;
+        }
+
+
+        .analyze-button {
+
+            margin-top: 20px;
+
+            width: 100%;
+
+            max-width: 400px;
+
+            padding: 13px 20px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .analyze-button:hover {
+
+            background: #1d4ed8;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px
+                rgba(37, 99, 235, 0.25);
+        }
+
+
+        .formats {
+
+            margin-top: 15px;
+
+            color: #64748b;
+
+            font-size: 11px;
+        }
+
+
+        /* =========================
+           FEATURES
+        ========================= */
+
+        .section-heading {
+
+            text-align: center;
+
+            margin-bottom: 20px;
+        }
+
+
+        .section-heading h2 {
+
+            font-size: 23px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .section-heading p {
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        .features {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+
+            margin-bottom: 45px;
+        }
+
+
+        .feature-card {
+
+            padding: 22px 17px;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.04
+            );
+
+            border: 1px solid rgba(
+                255,
+                255,
+                255,
+                0.07
+            );
+
+            border-radius: 14px;
+
+            transition: 0.3s;
+        }
+
+
+        .feature-card:hover {
+
+            transform: translateY(-4px);
+
+            border-color: #334155;
+
+            background: rgba(
+                255,
+                255,
+                255,
+                0.06
+            );
+        }
+
+
+        .feature-icon {
+
+            font-size: 27px;
+
+            margin-bottom: 12px;
+        }
+
+
+        .feature-card h3 {
+
+            font-size: 14px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .feature-card p {
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================
+           HOW IT WORKS
+        ========================= */
+
+        .how-it-works {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 18px;
+
+            margin-bottom: 45px;
+        }
+
+
+        .step {
+
+            text-align: center;
+
+            padding: 22px;
+        }
+
+
+        .step-number {
+
+            width: 38px;
+
+            height: 38px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin: 0 auto 12px;
+
+            border-radius: 50%;
+
+            background: #1e3a8a;
+
+            color: #bfdbfe;
+
+            font-weight: bold;
+
+            font-size: 14px;
+        }
+
+
+        .step h3 {
+
+            font-size: 14px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .step p {
+
+            color: #64748b;
+
+            font-size: 12px;
+
+            line-height: 1.5;
+        }
+
+
+        /* =========================
+           TECH STACK
+        ========================= */
+
+        .tech-section {
+
+            text-align: center;
+
+            margin-bottom: 40px;
+        }
+
+
+        .tech-tags {
+
+            display: flex;
+
+            justify-content: center;
+
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            margin-top: 15px;
+        }
+
+
+        .tech-tag {
+
+            padding: 7px 12px;
+
+            border-radius: 15px;
+
+            background: #1e293b;
+
+            color: #94a3b8;
+
+            font-size: 11px;
+        }
+
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+
+            text-align: center;
+
+            border-top: 1px solid #1e293b;
+
+            padding: 22px 0 8px;
+
+            color: #475569;
+
+            font-size: 11px;
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            .features {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+
+            .hero h1 {
+
+                font-size: 36px;
+            }
+
+        }
+
+
+        @media (max-width: 550px) {
+
+            body {
+
+                padding: 15px;
+            }
+
+
+            .navbar {
+
+                padding-bottom: 15px;
+            }
+
+
+            .student-badge {
+
+                display: none;
+            }
+
+
+            .hero {
+
+                padding-top: 35px;
+            }
+
+
+            .hero h1 {
+
+                font-size: 30px;
+            }
+
+
+            .hero p {
+
+                font-size: 14px;
+            }
+
+
+            .upload-card {
+
+                padding: 18px;
+            }
+
+
+            .features,
+            .how-it-works {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🔐
+            </div>
+
+            <div class="logo-text">
+                PrivacyGuard
+            </div>
+
+        </div>
+
+
+        <div class="student-badge">
+            College Cybersecurity Project
+        </div>
+
+    </nav>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero">
+
+        <div class="hero-icon">
+            🛡️
+        </div>
+
+
+        <h1>
+            Protect Your Data
+            <span>Before You Share</span>
+        </h1>
+
+
+        <p>
+
+            PrivacyGuard analyzes documents for
+            potentially sensitive information and
+            helps you understand the privacy risks
+            before sharing them online.
+
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         UPLOAD
+    ========================== -->
+
+    <form
+        action="/scan"
+        method="POST"
+        enctype="multipart/form-data"
+        class="upload-card"
+    >
+
+        <div class="upload-area">
+
+            <div class="upload-icon">
+                📁
+            </div>
+
+
+            <div class="upload-title">
+                Upload a document to scan
+            </div>
+
+
+            <div class="upload-subtitle">
+
+                Select a file and let PrivacyGuard
+                check it for privacy-sensitive data.
+
+            </div>
+
+
+            <input
+                type="file"
+                name="file"
+                accept=".txt,.pdf,.docx"
+                required
+            >
+
+
+            <button
+                type="submit"
+                class="analyze-button"
+            >
+
+                🔎 Analyze Privacy Risk
+
+            </button>
+
+
+            <div class="formats">
+
+                Supported formats:
+                PDF • DOCX • TXT
+
+            </div>
+
+        </div>
+
+    </form>
+
+
+    <!-- =========================
+         FEATURES
+    ========================== -->
+
+    <section>
+
+        <div class="section-heading">
+
+            <h2>
+                What PrivacyGuard Checks
+            </h2>
+
+            <p>
+                Simple privacy analysis for everyday documents.
+            </p>
+
+        </div>
+
+
+        <div class="features">
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📧
+                </div>
+
+                <h3>
+                    Email Detection
+                </h3>
+
+                <p>
+                    Identifies email addresses that
+                    may expose personal information.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    📱
+                </div>
+
+                <h3>
+                    Phone Detection
+                </h3>
+
+                <p>
+                    Detects phone numbers that could
+                    reveal personal contact details.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🌐
+                </div>
+
+                <h3>
+                    IP Detection
+                </h3>
+
+                <p>
+                    Finds IP addresses that may reveal
+                    network-related information.
+                </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+                <div class="feature-icon">
+                    🔑
+                </div>
+
+                <h3>
+                    Secret Detection
+                </h3>
+
+                <p>
+                    Looks for passwords, API keys,
+                    tokens and other credentials.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         HOW IT WORKS
+    ========================== -->
+
+    <section>
+
+        <div class="section-heading">
+
+            <h2>
+                How It Works
+            </h2>
+
+            <p>
+                Three simple steps to protect your document.
+            </p>
+
+        </div>
+
+
+        <div class="how-it-works">
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    1
+                </div>
+
+                <h3>
+                    Upload
+                </h3>
+
+                <p>
+                    Choose a PDF, DOCX or TXT file
+                    from your device.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    2
+                </div>
+
+                <h3>
+                    Analyze
+                </h3>
+
+                <p>
+                    PrivacyGuard scans the document
+                    for sensitive information.
+                </p>
+
+            </div>
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    3
+                </div>
+
+                <h3>
+                    Protect
+                </h3>
+
+                <p>
+                    Review the risks and download
+                    a cleaned version if needed.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         TECHNOLOGY
+    ========================== -->
+
+    <section class="tech-section">
+
+        <div class="section-heading">
+
+            <h2>
+                Built With
+            </h2>
+
+            <p>
+                Technologies used in this project.
+            </p>
+
+        </div>
+
+
+        <div class="tech-tags">
+
+            <span class="tech-tag">
+                Python
+            </span>
+
+            <span class="tech-tag">
+                Flask
+            </span>
+
+            <span class="tech-tag">
+                HTML
+            </span>
+
+            <span class="tech-tag">
+                CSS
+            </span>
+
+            <span class="tech-tag">
+                Regular Expressions
+            </span>
+
+            <span class="tech-tag">
+                PyPDF
+            </span>
+
+            <span class="tech-tag">
+                python-docx
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer>
+
+        🔐 PrivacyGuard
+        • Digital Privacy Risk Analyzer
+        • College Project
+
+    </footer>
+
+
+</div>
+
+
+</body>
+
+</html>
