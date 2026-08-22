@@ -9,10 +9,20 @@ from PIL import Image
 # TESSERACT CONFIGURATION
 # ============================================================
 
-TESSERACT_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+# ============================================================
+# TESSERACT CONFIGURATION
+# ============================================================
 
-if os.path.exists(TESSERACT_PATH):
-    pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
+# Windows
+if os.name == "nt":
+    TESSERACT_PATH = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+    if os.path.exists(TESSERACT_PATH):
+        pytesseract.pytesseract.tesseract_cmd = TESSERACT_PATH
+
+# Linux / Render
+else:
+    pytesseract.pytesseract.tesseract_cmd = "tesseract"
 
 
 # ============================================================
