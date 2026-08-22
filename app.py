@@ -1,7 +1,9 @@
+from flask import request
 import io
 import os
 import re
 import uuid
+import time
 from datetime import datetime
 
 from flask import (
@@ -39,6 +41,8 @@ from reportlab.platypus import (
 app = Flask(__name__)
 
 app.config["MAX_CONTENT_LENGTH"] = 25 * 1024 * 1024
+app.config["MAX_FORM_MEMORY_SIZE"] = 25 * 1024 * 1024
+app.config["MAX_FORM_PARTS"] = 20
 
 
 # ============================================================
@@ -274,8 +278,17 @@ def home():
 )
 def scan():
 
+    upload_start = time.time()
+
+    print("=== SCAN REQUEST STARTED ===")
+
     uploaded_file = request.files.get(
         "file"
+    )
+
+    print(
+        "=== FILE RECEIVED IN %.2f SECONDS ==="
+        % (time.time() - upload_start)
     )
 
     if uploaded_file is None or not uploaded_file.filename:

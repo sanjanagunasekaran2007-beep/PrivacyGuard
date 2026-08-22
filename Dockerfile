@@ -24,4 +24,4 @@ RUN mkdir -p Uploads
 EXPOSE 10000
 
 # Start Flask using Gunicorn
-CMD ["gunicorn", "--bind", "0.0.0.0:10000", "app:app"]
+CMD ["gunicorn", "--bind", "0.0.0.0:10000","--timeout", "300", "app:app"]

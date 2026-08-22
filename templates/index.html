@@ -549,12 +549,20 @@ const uploadBox = document.getElementById("uploadBox");
 
 function showFileName(file) {
     if (file) {
-        fileName.textContent = "Selected: " + file.name;
+
+        const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+
+        fileName.textContent =
+            "Selected: " + file.name +
+            " · " + sizeMB + " MB";
+
     } else {
-        fileName.textContent = "No file selected · drag & drop also works";
+
+        fileName.textContent =
+            "No file selected · drag & drop also works";
+
     }
 }
-
 fileInput.addEventListener("change", function () {
     showFileName(this.files && this.files[0]);
 });
@@ -583,11 +591,32 @@ uploadBox.addEventListener("drop", function (e) {
     }
 });
 
-scanForm.addEventListener("submit", function () {
-    scanButton.disabled = true;
-    scanButton.innerHTML = "Scanning file&hellip;";
-});
+scanForm.addEventListener("submit", function (e) {
 
+    const file = fileInput.files[0];
+
+    if (!file) {
+        e.preventDefault();
+        alert("Please select a file.");
+        return;
+    }
+
+    const maxSize = 25 * 1024 * 1024;
+
+    if (file.size > maxSize) {
+        e.preventDefault();
+
+        alert(
+            "File is too large.\n\n" +
+            "Maximum allowed size is 25 MB."
+        );
+
+        return;
+    }
+
+    scanButton.disabled = true;
+    scanButton.innerHTML = "Uploading & scanning…";
+});
 </script>
 
 
