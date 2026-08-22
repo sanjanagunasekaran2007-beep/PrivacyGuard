@@ -1,3 +1,11 @@
 Flask
+Werkzeug
+pytesseract
+Pillow
 pypdf
+PyMuPDF
 python-docx
+openpyxl
+python-pptx
+reportlab
+ 
