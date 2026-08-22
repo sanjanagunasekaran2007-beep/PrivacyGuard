@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
 COPY requirement.txt .
 
 # Install Python dependencies
-RUN pip install --no-cache-dir -r Requirement.txt
+RUN pip install --no-cache-dir -r requirement.txt
 
 # Copy application
 COPY . .
